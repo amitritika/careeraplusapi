@@ -20,8 +20,10 @@ const blogRoutes = require('./routes/blog');
 const categoryRoutes = require('./routes/category');
 const tagRoutes = require('./routes/tag');
 
+const db = (process.env.NODE_ENV == "development") ? process.env.DATABASE_CLOUD_DEV : process.env.DATABASE_CLOUD_PROD
+
 mongoose
-  .connect(process.env.DATABASE_CLOUD, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true})
+  .connect(db, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true})
   .then(() => console.log("DB Connected"));
 
 app.use(morgan("dev"));
