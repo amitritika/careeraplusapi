@@ -32,7 +32,11 @@ app.use(cookieParser());
 app.use(cors());
 
 if(process.env.NODE_ENV == "development"){
-  app.use(cors({origin: `${process.env.CLIENT_URL}`}));
+  app.use(cors({origin: `${process.env.CLIENT_URL_DEV}`}));
+}
+
+if(process.env.NODE_ENV == "production"){
+  app.use(cors({origin: `${process.env.CLIENT_URL_PROD}`}));
 }
 
 
