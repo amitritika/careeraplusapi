@@ -90,9 +90,9 @@ const userSchema = new mongoose.Schema({
       },
     projectInformation: {
         majTitle:{type: String, default:"TREADMIL BICYCLE"},
-        majDes:{type: String, default:"Treadmill bicycle is a unique way of moving. In this project we made a prototype of a bicycle which gets the power not with pedal wheel but with the movement of treadmill belt when you walk on it."},
+        majDes:{type: String, default:"<p>Treadmill bicycle is a unique way of moving. In this project we made a prototype of a bicycle which gets the power not with pedal wheel but with the movement of treadmill belt when you walk on it.</p>"},
         minTitle:{type: String, default:"Gear CAD Design"},
-        minDes:{type: String, default:"Designed Gear Design in Pro-E, uing a parametric Model. <br> By using only two parameters, Module and No. of theeths a CAD model will be generated automatically."}
+        minDes:{type: String, default:"<p>Designed Gear Design in Pro-E, uing a parametric Model. <br> By using only two parameters, Module and No. of theeths a CAD model will be generated automatically.</p>"}
         
       },
     trainingInformation: {
@@ -100,13 +100,13 @@ const userSchema = new mongoose.Schema({
         org1: {type: String, default:"EICHER TRACTORS"},
         startDate1: {type: String, default:"01/05/2015"},
         endDate1: {type: String, default:"01/06/2015"},
-        des1: {type: String, default:"Unit of TAFE Motors and Tractor Ltd <br> Projects Handled: <br> 1. Rapid Entire Body Assessment (REBA) <br> 2. Hazard Identification and Risk Analysis (HIRA)"},
+        des1: {type: String, default:"<p>Unit of TAFE Motors and Tractor Ltd. Projects Handled: <p> 1. Rapid Entire Body Assessment (REBA) </p> <p>2. Hazard Identification and Risk Analysis (HIRA)</p>"},
         training2: {type: String, default:"Industrial Training"},
         org2:{type: String, default:"BHEL Bhopal"},
         startDate2: {type: String, default:"01/07/2016"},
         endDate2: {type: String, default:"01/07/2016"},
-        des2: {type: String, default:"Unit of Turbine Manufacturing.<br>Gained Knowledge on Manufacturing and Design process of Gas Turbine."}
-       
+        des2: {type: String, default:"<p>Unit of Turbine Manufacturing.<br>Gained Knowledge on Manufacturing and Design process of Gas Turbine.</p>"},
+        trainingDisplay: {type: Boolean, default:false}
       },
     skills: {
         skill1: {type: String, default:"Pro-E"},
@@ -119,12 +119,12 @@ const userSchema = new mongoose.Schema({
         rating4: {type: String, default:"5"},
         skill5: {type: String, default:"Positive Attitude"},
         rating5: {type: String, default:"5"},
-        skill6: {type: String, default:""},
-        rating6: {type: String, default:""},
-        skill6show: false,
-        skill7: {type: String, default:""},
-        rating7: {type: String, default:""},
-        skill7show: false,
+        skill6: {type: String, default:"Skill 6"},
+        rating6: {type: String, default:"4"},
+        skill6Display: {type: Boolean, default:false},
+        skill7: {type: String, default:"Skill 7"},
+        rating7: {type: String, default:"5"},
+        skill7Display: {type: Boolean, default:false}
       },
       hobbies: {
         hobby1: {type: String, default:"Tennis"},
@@ -132,6 +132,7 @@ const userSchema = new mongoose.Schema({
         hobby3: {type: String, default:"Playing Guitar"}
       },
     areaOfIntrest:{
+        area: {type: String, default:"eng"},
         area1: {type: String, default:"ME"},
         area1Topic: {type: String, default:"Strength of Materials"},
         area2: {type: String, default:"ME"},
@@ -145,7 +146,9 @@ const userSchema = new mongoose.Schema({
         extra2: {type: String, default:"Won 3rd Prize in Debate Competition in College"},
         extra3: {type: String, default:"Active member of KD Food for Life a Non-profit Social organization"},
         extra4: {type: String, default:""},
-        extra5: {type: String, default:""}
+        extra5: {type: String, default:""},
+        extra4Display: {type: Boolean, default:false},
+        extra5Display: {type: Boolean, default:false}
       }
   }
   

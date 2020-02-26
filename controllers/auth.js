@@ -9,7 +9,7 @@ const _ = require('lodash');
 // sendgrid
 const sgMail = require('@sendgrid/mail'); // SENDGRID_API_KEY
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
+const CLIENT_URL = (process.env.NODE_ENV == "development") ? process.env.CLIENT_URL_DEV : process.env.CLIENT_URL_PROD
 
 exports.preSignup = (req, res) => {
     const { name, email, password } = req.body;
@@ -27,7 +27,7 @@ exports.preSignup = (req, res) => {
             subject: `Account activation link`,
             html: `
             <p>Please use the following link to activate your acccount:</p>
-            <p>${process.env.CLIENT_URL}/auth/account/activate/${token}</p>
+            <p>${CLIENT_URL}/auth/account/activate/${token}</p>
             <hr />
             <p>This email may contain sensetive information</p>
             <p>https://seoblog.com</p>
@@ -53,7 +53,7 @@ exports.preSignup = (req, res) => {
     
 //     const {name, email, password} = req.body;
 //     let username = shortId.generate();
-//     let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+//     let profile = `${CLIENT_URL}/profile/${username}`;
     
 //     let newUser = new User({name, email, password, profile, username});
     
@@ -85,7 +85,7 @@ exports.signup = (req, res) => {
             const { name, email, password } = jwt.decode(token);
 
             let username = shortId.generate();
-            let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+            let profile = `${CLIENT_URL}/profile/${username}`;
 
             const user = new User({ name, email, password, profile, username });
             user.save((err, user) => {
@@ -203,7 +203,7 @@ exports.forgotPassword = (req, res) => {
             subject: `Password reset link`,
             html: `
             <p>Please use the following link to reset your password:</p>
-            <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+            <p>${CLIENT_URL}/auth/password/reset/${token}</p>
             <hr />
             <p>This email may contain sensetive information</p>
             <p>https://careeraplus.in</p>
@@ -278,7 +278,7 @@ exports.googleLogin = (req, res) => {
                     return res.json({ token, user: { _id, email, name, role, username } });
                 } else {
                     let username = shortId.generate();
-                    let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+                    let profile = `${CLIENT_URL}/profile/${username}`;
                     let password = jti;
                     user = new User({ name, email, profile, username, password });
                     user.save((err, data) => {
