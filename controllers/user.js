@@ -32,12 +32,12 @@ exports.update = (req, res) => {
                 });
             }
             
-            user.photo.data = fs.readFileSync(files.photo.path);
+            user.photo.data = fs.readFileSync(files.photosrc.path);
             
             
             user.photo.contentType = files.photo.type;
         }
-      user.photo.data = fs.readFileSync(files.photosrc.path);
+      //user.photo.data = fs.readFileSync(files.photosrc.path);
 
         user.save((err, result) => {
             if (err) {
