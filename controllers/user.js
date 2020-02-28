@@ -25,8 +25,8 @@ exports.update = (req, res) => {
         let user = req.profile;
         user = _.extend(user, fields);
 
-        if (files.photo) {
-            if (files.photo.size > 10000000) {
+        if (files.photosrc) {
+            if (files.photosrc.size > 10000000) {
                 return res.status(400).json({
                     error: 'Image should be less than 1mb'
                 });
@@ -35,7 +35,7 @@ exports.update = (req, res) => {
             user.photo.data = fs.readFileSync(files.photosrc.path);
             
             
-            user.photo.contentType = files.photo.type;
+            user.photo.contentType = files.photosrc.type;
         }
       //user.photo.data = fs.readFileSync(files.photosrc.path);
 
