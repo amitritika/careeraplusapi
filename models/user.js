@@ -150,6 +150,13 @@ const userSchema = new mongoose.Schema({
         extra4Display: {type: Boolean, default:false},
         extra5Display: {type: Boolean, default:false}
       }
+  },
+  visualresumeexp:{
+    typeOfResume:{type: String, default: ""},
+    data:{
+    type: Object,
+    default: {}
+    }
   }
   
 }, 
