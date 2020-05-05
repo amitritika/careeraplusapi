@@ -7,7 +7,7 @@ exports.contactForm = (req, res) => {
 
     const emailData = {
         to: process.env.EMAIL_TO,
-        from: email,
+        from: `contact@careeraplus.in`,
         subject: `Contact form - ${process.env.APP_NAME}`,
         text: `Email received from contact from \n Sender name: ${name} \n Sender email: ${email} \n Sender message: ${message}`,
         html: `
@@ -21,9 +21,24 @@ exports.contactForm = (req, res) => {
         `
     };
 
-    sgMail.send(emailData).then(sent => {
+    sgMail.send(emailData)
+      .then(sent => {
         return res.json({
             success: true
         });
-    });
+    })
+  .catch(error => {
+    // Log friendly error
+    console.error(error);
+
+    if (error.response) {
+      // Extract error msg
+      const {message, code, response} = error;
+
+      // Extract response msg
+      const {headers, body} = response;
+
+      console.error(body);
+    }
+  });
 };
