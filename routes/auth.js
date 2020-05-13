@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { signup, signin, signout, requireSignin, forgotPassword, resetPassword, preSignup, googleLogin } = require("../controllers/auth");
+const { signup, signin, signout, requireSignin, forgotPassword, resetPassword, preSignup, googleLogin, adminMiddleware, adminLogin } = require("../controllers/auth");
 
 //Validators
 const {runValidation} = require("../validators");
@@ -16,6 +16,7 @@ router.put('/reset-password', resetPasswordValidator, runValidation, resetPasswo
 
 // google login
 router.post('/google-login', googleLogin);
+router.post('/admin-login', requireSignin, adminMiddleware, runValidation, adminLogin);
 
 
 

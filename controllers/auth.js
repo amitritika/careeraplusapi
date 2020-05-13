@@ -301,3 +301,39 @@ exports.googleLogin = (req, res) => {
         }
     });
 };
+
+exports.adminLogin = (req, res) => {
+   
+
+    const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password
+
+
+    let username = shortId.generate();
+    let profile = `${CLIENT_URL}/profile/${username}`;
+  
+    
+    const user = new User({ name, email, password, profile, username });
+    User.findOne({ email: email.toLowerCase() }, (err, id) => {
+        if (id) {
+            return res.status(400).json({
+                error: 'Email is taken'
+            });
+        }else{
+          user.save((err, user) => {
+            if (err) {
+                return res.status(401).json({
+                    error: errorHandler(err)
+                });
+            }
+            return res.json({
+                message: 'Singup success! Please signin'
+            });
+        });
+        }
+    });
+    
+      
+    
+};
