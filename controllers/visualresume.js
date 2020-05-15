@@ -16,6 +16,7 @@ exports.updateVisualresume = (req, res) => {
     let user = req.profile;
   
     user.visualresume = req.body;
+    user.version = 1;
     user.save((err, result) => {
         if (err) {
             return res.status(400).json({
