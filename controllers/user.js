@@ -7,6 +7,8 @@ const { errorHandler } = require('../helpers/dbErrorHandler');
 const url = (process.env.NODE_ENV == "development") ? process.env.CLIENT_URL_DEV : process.env.CLIENT_URL_PROD
 exports.read = (req, res) => {
     req.profile.hashed_password = undefined;
+    req.profile.profile_photo = undefined;
+    //req.profile.photo = undefined;
     //res.send("Hi")
     return res.json(req.profile);
 };
