@@ -25,6 +25,8 @@ exports.updateVisualresume = (req, res) => {
         }
         user.hashed_password = undefined;
         user.salt = undefined;
+        user.photo = undefined;
+        user.profile_photo = undefined;
         res.json(user);
     });
 };
@@ -52,4 +54,26 @@ exports.updateVisualresumeexp = (req, res) => {
     });
 };
 
+
+exports.readVisualresumepro = (req, res) => {
+    req.profile.hashed_password = undefined;
+    //res.send("Hi")
+    return res.json(req.profile.visualresumepro);
+};
+
+exports.updateVisualresumepro = (req, res) => {
+    let user = req.profile;
+  
+    user.visualresumepro = req.body;
+    user.save((err, result) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'All fields required'
+            });
+        }
+        user.hashed_password = undefined;
+        user.salt = undefined;
+        res.json(user);
+    });
+};
 

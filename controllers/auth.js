@@ -337,3 +337,50 @@ exports.adminLogin = (req, res) => {
       
     
 };
+
+exports.adminUserSignin = (req, res) => {
+  const {email, password, user_email} = req.body;
+  
+  // check if user exists
+  User.findOne({email}).exec((err, user)=> {
+    if(err || !user){
+      return res.status(400).json({
+        error: "User with this email doenot exixt Please signUP"
+      });
+    }
+    //authenticate
+    if(!user.authenticate(password)){
+      return res.status(400).json({
+        error: "Email password doesnot Match"
+      });
+    }
+    
+    if(user.role !== 1){
+      return res.status(400).json({
+        error: "You are Not Admin"
+      });
+    }else{
+      User.findOne({email: user_email}).exec((err, userdata)=> {
+        
+        if(err || !userdata){
+          
+          return res.status(400).json({
+            error: "User with this email doesnot exixt Please signUP"
+          });
+        }
+        //generate a token and send to client
+          const token = jwt.sign({_id: userdata._id}, process.env.JWT_SECRET, {expiresIn: "1d"});
+           
+          res.cookie("token", token, {expiresIn: "1d"})
+          const {id, username, name, email, role} = userdata;
+          return res.json({
+            token,
+            user: {id, username, name, email, role}
+          });
+      })
+    }
+    
+    
+  });
+  
+}

@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
+  resume_photo: {
+    data: Buffer,
+    contentType: String
+  },
   hashed_password: {
     type: String,
     required: true
@@ -66,6 +70,13 @@ const userSchema = new mongoose.Schema({
     overallresponse: {type: Array, default: []}
   },
   visualresume:{
+    typeOfResume:{type: String, default: ""},
+    data:{
+    type: Object,
+    default: {}
+    }
+  },
+  visualresumepro:{
     typeOfResume:{type: String, default: ""},
     data:{
     type: Object,
