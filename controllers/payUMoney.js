@@ -1,5 +1,6 @@
 const crypto = require("crypto");
-
+const { errorHandler } = require('../helpers/dbErrorHandler');
+const Button = require('../models/payment');
 exports.payUMoneyPayment = function (req, res) {
   if (!req.body.txnid || !req.body.amount || !req.body.productinfo || !req.body.firstname || !req.body.email) {
 		console.log(req.body.amount)
@@ -45,3 +46,67 @@ exports.payUMoneyPaymentResponse = function (req, res) {
          res.send({'status':"Error occured"});
      }
   }
+
+
+exports.createPayUMoneyButtons = (req, res) => {
+	
+    let btn = new Button({ });
+  btn.name = req.body.name
+  btn.button = req.body.button
+	btn.discount = req.body.discount
+    btn.save((err, data) => {
+        if (err) {
+            console.log(err);
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json(data); // dont do this res.json({ tag: data });
+    });
+};
+
+exports.updatePayUMoneyButtons = (req, res) => {
+    let name = req.params.name;
+		let button = req.body.button;
+    Button.findOne({name}).exec((err, data) => {
+        if (err || !data) {
+            return res.status(400).json({
+                error: 'Button not found'
+            });
+        }
+         else  {
+          data.button = button;
+					 data.discount = req.body.discount;
+					 data.save((err, result) => {
+                  if (err) {
+                      return res.status(400).json({
+                          error: errorHandler(err)
+                      });
+                  }else{
+                    return res.status(200).json({
+                          message: 'Button Updated'
+                      });
+                  }
+                  
+                  });
+        }
+        
+    });
+};
+
+
+
+exports.payUMoneyButtons = (req, res) => {
+    let name = req.params.name;
+    Button.findOne({name}).exec((err, data) => {
+        if (err || !data) {
+            return res.status(400).json({
+                error: 'Button not found'
+            });
+        }
+         else  {
+          return res.send(data);
+        }
+        
+    });
+};
