@@ -9,6 +9,7 @@ const url = (process.env.NODE_ENV == "development") ? process.env.CLIENT_URL_DEV
 const api = (process.env.NODE_ENV == "development") ? process.env.CLIENT_API_DEV : process.env.CLIENT_API_PROD
 const key = (process.env.NODE_ENV == "development") ? process.env.TEST_MERCHANT_KEY : process.env.PROD_MERCHANT_KEY
 const salt = (process.env.NODE_ENV == "development") ? process.env.TEST_MERCHANT_SALT : process.env.PROD_MERCHANT_SALT
+const url_transaction = (process.env.NODE_ENV == "development") ? process.env.TEST_URL_TRANSACTION : process.env.PROD_URL_TRANSACTION
 const axios = require("axios");
 const crypto = require("crypto");
 var querystring = require("querystring");
@@ -338,7 +339,7 @@ exports.updateTransactions = (req, res) => {
     }
     
     axios
-      .post('https://test.payu.in/merchant/postservice.php?form=2', querystring.stringify(obj), params)
+      .post(url_transaction, querystring.stringify(obj), params)
       .then(response => {
         let discount_slug = response.data.transaction_details[txnid].udf1;
         let status = response.data.transaction_details[txnid].status;
