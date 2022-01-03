@@ -12,9 +12,10 @@ exports.payUMoneyPayment = function (req, res) {
          var pd = req.body;
          var hashString = "";
          if(process.env.NODE_ENV=== "development"){
-           hashString = process.env.TEST_MERCHANT_KEY  + '|' + pd.txnid + '|' + pd.amount + '|' + pd.productinfo + '|' + pd.firstname + '|' + pd.email + '|' + '||||||||||' + process.env.TEST_MERCHANT_SALT;
-         }else{
-           hashString = process.env.PROD_MERCHANT_KEY  + '|' + pd.txnid + '|' + pd.amount + '|' + pd.productinfo + '|' + pd.firstname + '|' + pd.email + '|' + '||||||||||' + process.env.PROD_MERCHANT_SALT;
+           hashString = process.env.TEST_MERCHANT_KEY  + '|' + pd.txnid + '|' + pd.amount + '|' + pd.productinfo + '|' + pd.firstname + '|' + pd.email + '|' + pd.udf1 + '||||||||||' + process.env.TEST_MERCHANT_SALT;
+         		console.log(hashString);
+				 }else{
+           hashString = process.env.PROD_MERCHANT_KEY  + '|' + pd.txnid + '|' + pd.amount + '|' + pd.productinfo + '|' + pd.firstname + '|' + pd.email + '|' + pd.udf1 + '||||||||||' + process.env.PROD_MERCHANT_SALT;
 
          }
          

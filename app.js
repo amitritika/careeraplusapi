@@ -20,6 +20,7 @@ const blogRoutes = require('./routes/blog');
 const categoryRoutes = require('./routes/category');
 const tagRoutes = require('./routes/tag');
 const imageRoutes = require('./routes/image');
+const discountRoutes = require('./routes/discount');
 
 const db = (process.env.NODE_ENV == "development") ? process.env.DATABASE_CLOUD_DEV : process.env.DATABASE_CLOUD_PROD
 
@@ -57,6 +58,7 @@ app.use('/api', blogRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', tagRoutes);
 app.use('/api', imageRoutes);
+app.use('/api', discountRoutes);
 
 const port = process.env.PORT || 8000;
 

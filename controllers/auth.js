@@ -30,7 +30,7 @@ exports.preSignup = (req, res) => {
             <p>${CLIENT_URL}/auth/account/activate/${token}</p>
             <hr />
             <p>This email may contain sensetive information</p>
-            <p>https://seoblog.com</p>
+            <p>https://careeraplus.in</p>
         `
         };
 
@@ -113,7 +113,7 @@ exports.signin = (req, res) => {
   User.findOne({email}).exec((err, user)=> {
     if(err || !user){
       return res.status(400).json({
-        error: "User with this email doenot exixt Please signUP"
+        error: "User with this email doesnot exixt Please signUP"
       });
     }
     //authenticate

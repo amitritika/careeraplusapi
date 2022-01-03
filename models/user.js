@@ -33,6 +33,9 @@ const userSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
+  profile_resume:{
+    type: Object
+  },
   resume_photo: {
     data: Buffer,
     contentType: String
@@ -89,6 +92,10 @@ const userSchema = new mongoose.Schema({
     type: Object,
     default: {}
     }
+  },
+  transactions: {
+    type: Array,
+    default:[]
   },
   version: {type: Number, default: 1}
 }, 
