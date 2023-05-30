@@ -21,6 +21,7 @@ const categoryRoutes = require('./routes/category');
 const tagRoutes = require('./routes/tag');
 const imageRoutes = require('./routes/image');
 const discountRoutes = require('./routes/discount');
+const generateSitemap = require('./routes/sitemap');
 
 const db = (process.env.NODE_ENV == "development") ? process.env.DATABASE_CLOUD_DEV : process.env.DATABASE_CLOUD_PROD
 
@@ -59,6 +60,7 @@ app.use('/api', categoryRoutes);
 app.use('/api', tagRoutes);
 app.use('/api', imageRoutes);
 app.use('/api', discountRoutes);
+app.get('/api/sitemap.xml', generateSitemap);
 
 const port = process.env.PORT || 8000;
 
