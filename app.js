@@ -7,7 +7,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
+app.use(cors());
 
+if(process.env.NODE_ENV == "production"){
+  app.use(cors({origin: `${process.env.CLIENT_URL_PROD}`}));
+}
 //routes
 const authRoutes = require("./routes/auth");
 const formRoutes = require("./routes/form");
@@ -31,15 +35,7 @@ mongoose
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
 
-if(process.env.NODE_ENV == "development"){
-  app.use(cors({origin: `${process.env.CLIENT_URL_DEV}`}));
-}
-
-if(process.env.NODE_ENV == "production"){
-  app.use(cors({origin: `${process.env.CLIENT_URL_PROD}`}));
-}
 
 
 //routes Middleware
